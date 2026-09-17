@@ -32,7 +32,13 @@ jobs:
         run: |
           python scraper.py
 
-      - name: Upload scraped Excel file
+      - name: Rename output with India date
+        run: |
+          SCRAPE_DATE=$(TZ=Asia/Kolkata date +"%Y-%m-%d")
+          mv 7th_flipkart_mobile_assortment_v5.xlsx \
+             "flipkart_mobile_assortment_${SCRAPE_DATE}.xlsx"
+
+      - name: Upload Excel as GitHub artifact
         uses: actions/upload-artifact@v4
         with:
           name: flipkart-mobile-assortment

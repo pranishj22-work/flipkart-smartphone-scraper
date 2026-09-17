@@ -31,3 +31,10 @@ jobs:
       - name: Run scraper
         run: |
           python scraper.py
+
+      - name: Upload scraped Excel file
+        uses: actions/upload-artifact@v4
+        with:
+          name: flipkart-mobile-assortment
+          path: "*.xlsx"
+          if-no-files-found: error

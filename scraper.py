@@ -93,7 +93,7 @@ RUN_APPLE_SUPPLEMENTAL_PASS = True   # set False to skip this pass entirely
 
 # Fixed filename (not timestamped) so resume-by-PageSummary works
 # across multiple runs.
-OUTPUT_FILE = "20th_flipkart_mobile_assortment_v5.xlsx"
+OUTPUT_FILE = "7th_flipkart_mobile_assortment_v5.xlsx"
 
 MAX_PAGES = 400                    # hard cap, mobiles is a huge category
 PRODUCTS_PER_PAGE_DEFAULT = 24     # used for partial-page ratio check

@@ -27,6 +27,10 @@ jobs:
       - name: Install Playwright browsers
         run: |
           playwright install --with-deps chromium
+          
+      - name: Test Flipkart connectivity
+        run: |
+          curl -I -L --max-time 20 https://www.flipkart.com
 
       - name: Run scraper
         run: |

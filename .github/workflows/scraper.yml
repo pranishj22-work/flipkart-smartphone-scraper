@@ -32,11 +32,30 @@ jobs:
         run: |
           python scraper.py
 
+      - name: Check scraper output
+        run: |
+          echo "Files created by scraper:"
+          find . -maxdepth 3 -type f -name "*.xlsx" -print
+
       - name: Rename output with India date
         run: |
           SCRAPE_DATE=$(TZ=Asia/Kolkata date +"%Y-%m-%d")
-          mv 7th_flipkart_mobile_assortment_v5.xlsx \
-             "flipkart_mobile_assortment_${SCRAPE_DATE}.xlsx"
+
+          FILE=$(find . -type f -name "*.xlsx" | head -n 1)
+
+          if [ -z "$FILE" ]; then
+            echo "ERROR: No Excel file was created by the scraper."
+            echo "Files in workspace:"
+            find . -maxdepth 3 -type f
+            exit 1
+          fi
+
+          echo "Found Excel file: $FILE"
+
+          mv "$FILE" "flipkart_mobile_assortment_${SCRAPE_DATE}.xlsx"
+
+          echo "Final file:"
+          ls -lh *.xlsx      
 
       - name: Upload Excel as GitHub artifact
         uses: actions/upload-artifact@v4
